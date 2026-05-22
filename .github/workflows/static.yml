@@ -32,15 +32,15 @@ jobs:
       - name: Checkout tools repo
         uses: actions/checkout@v6
         with:
-          repository: atrakic/static-generator
-          path: generator
+          repository: atrakic/makesite
+          path: makesite
       - name: Set up uv
         uses: astral-sh/setup-uv@v2
 
       - name: Build site
         run: |
           rm -rf _site
-          cd generator
+          cd makesite
           uv sync
           for ((i=1;i<=10;i++)); do
             uv run ../scripts/genposts.py > "content/blog/$(date -I)-$i.md"
